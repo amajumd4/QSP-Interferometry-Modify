@@ -411,7 +411,6 @@ def loss_fn_exact(phases, beta_th, K, sigma, flag_callback = False):
     return p_err
 
 def signal_poly_coeff(phases, K, sigma):
-    print("here in signal_poly_coeff")
     # calculate the half-period of the qubit response function
     half_period = torch.pi / (2 * K)
     degree = len(phases) - 1
@@ -841,7 +840,7 @@ for degree in degree_list:
         # generates a random list of 2d+1 angles *(b/w 0 to 2pi)
         phases0 = torch.rand(degree + 1) * 2 * torch.pi
 
-        print("phases0:", phases0)
+        print("initial phases guess:", phases0)
         
         # This is to use the original loss function directly
         new_callback = partial(loss_fn_exact, beta_th = beta_th, K = K, sigma = sigma, flag_callback = True)

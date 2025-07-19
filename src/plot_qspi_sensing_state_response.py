@@ -814,6 +814,7 @@ def signal_poly_prob_grid_qsp_partial(phases, K, sigma, num_grid, prop, beginnin
     '''
     degree = len(phases) - 1
     ccoeff = signal_poly_coeff(phases, K, sigma)
+    print("ccoeff", ccoeff)
     if beginning:
         beta_grid = torch.from_numpy(np.linspace(-torch.pi / (2 * K), prop * torch.pi / (2 * K), num_grid))
     else:
@@ -859,7 +860,7 @@ phases17 = torch.tensor([4.01204606, 3.36302421, 0.61104152, 0.62579379, 3.06581
 
 # specify what range of values to plot over (i.e., proportion of the total range) and whether to start from the beginning or the end when defining this range
 prop = 0.44
-beginning = False
+beginning = True
 
 # increase line thickness for zoomed insets
 linewidth = 3
@@ -880,6 +881,7 @@ beta_grid12, prob_grid12 = signal_poly_prob_grid_qsp_partial(phases12, K, sigma,
 beta_grid13, prob_grid13 = signal_poly_prob_grid_qsp_partial(phases13, K, sigma, num_grid, prop, beginning)
 beta_grid15, prob_grid15 = signal_poly_prob_grid_qsp_partial(phases15, K, sigma, num_grid, prop, beginning)
 beta_grid17, prob_grid17 = signal_poly_prob_grid_qsp_partial(phases17, K, sigma, num_grid, prop, beginning)
+
 
 # define limited range over one period in beta
 beta_grid1 /= torch.pi / (2 * K)
@@ -944,7 +946,7 @@ plt.ylabel(r'$\mathbb{P}(M = \downarrow) $')
 
 # adjust limits of plot as necessary given parameters from earlier
 if beginning:
-    plt.xlim(0, 0.44)
+    plt.xlim(-1, 1)
     plt.ylim(0.95, 1)
 else:
     plt.xlim(0.56, 1)
